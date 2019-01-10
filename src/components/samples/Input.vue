@@ -18,20 +18,15 @@
 </template>
 
 <script>
-  export default {
-    name: 'Input',
-    props: {
-      field: Object
-    },
-    created () {
-      this.field.init()
-    },
-    data () {
-      return {
-        value: ''
-      }
-    }
+export default {
+  name: 'Input',
+  props: {
+    field: Object
+  },
+  created () {
+    this.field.init()
   }
+}
 </script>
 
 <style scoped>

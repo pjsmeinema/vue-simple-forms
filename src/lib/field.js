@@ -1,5 +1,5 @@
 export class Field {
-  constructor (name, props={}) {
+  constructor (name, props = {}) {
     this.name = name
     this.id = `id_${name}`
     this.value = ''

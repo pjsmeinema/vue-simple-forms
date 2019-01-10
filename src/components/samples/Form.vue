@@ -65,62 +65,62 @@
 </template>
 
 <script>
-  import { Form } from '@/lib/base'
-  import { Field } from '@/lib/base'
-  import Input from '@/components/samples/Input.vue'
+import { Form } from '@/lib/base'
+import { Field } from '@/lib/base'
+import Input from '@/components/samples/Input.vue'
 
-  // Add fields manually;
-  const loginForm = new Form('Login Form')
-  loginForm.textField = 'username'
-  loginForm.passwordField = 'password'
+// Add fields manually;
+const loginForm = new Form('Login Form')
+loginForm.textField = 'username'
+loginForm.passwordField = 'password'
 
-  // Add fields (text fields) automatically;
-  const registerForm = new Form('Register Form', ['username', 'firstName', 'lastName'])
+// Add fields (text fields) automatically;
+const registerForm = new Form('Register Form', ['username', 'firstName', 'lastName'])
 
-  // Add instantiated field objects;
-  let field = new Field('address', {initial: 'test'})
-  field.required = false
+// Add instantiated field objects;
+const field = new Field('address', { initial: 'test' })
+field.required = false
 
-  registerForm.field = field
+registerForm.field = field
 
-  export default {
-    name: 'FormExample',
-    components: {
-      'v-input': Input
-    },
-    data () {
-      return {
-        loginForm: loginForm,
-        registerForm: registerForm.reset()
-      }
-    },
+export default {
+  name: 'FormExample',
+  components: {
+    'v-input': Input
+  },
+  data () {
+    return {
+      loginForm: loginForm,
+      registerForm: registerForm.reset()
+    }
+  },
 
-    methods: {
-      submitLogin() {
-        this.loginForm.resetErrors()
+  methods: {
+    submitLogin () {
+      this.loginForm.resetErrors()
 
-        let exampleResponse = {
-          status: 400,
-          data: {
-            username: ['Username already exists'],
-            password: ['Password is a stupid choice', 'You dont belong to this society anymore']
-          }
+      const exampleResponse = {
+        status: 400,
+        data: {
+          username: ['Username already exists'],
+          password: ['Password is a bad choice']
         }
-        this.loginForm.setErrors(exampleResponse)
-      },
-      submitRegister() {
-        let form = this.registerForm
-        let formData = this.registerForm.data
-        let formSelectedData = this.registerForm.getData(
-          ['firstName', 'lastName']
-        )
-
-        console.log('form', form)
-        console.log('form.data', formData)
-        console.log('form.getData', formSelectedData)
       }
+      this.loginForm.setErrors(exampleResponse)
+    },
+    submitRegister () {
+      const form = this.registerForm
+      const formData = this.registerForm.data
+      const formSelectedData = this.registerForm.getData(
+        ['firstName', 'lastName']
+      )
+
+      console.log('form', form)
+      console.log('form.data', formData)
+      console.log('form.getData', formSelectedData)
     }
   }
+}
 </script>
 
 <style scoped>

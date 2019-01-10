@@ -1,5 +1,7 @@
 # vue-simple-forms
 
+`vue-simple-forms` is a very useful library that makes it easy to handle the logic of forms in Vue.js.
+
 ## Project setup
 ```
 npm install
