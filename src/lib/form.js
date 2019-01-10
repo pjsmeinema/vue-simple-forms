@@ -78,9 +78,6 @@ export class Form {
       data = this.data
     }
 
-    return {
-      ...data,
-      ...extraData
-    }
+    return Object.assign(data, extraData)
   }
 }
