@@ -9,6 +9,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "main": "src/lib/base.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pjsmeinema/vue-forms.git"
