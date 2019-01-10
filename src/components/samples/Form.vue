@@ -66,18 +66,25 @@
 
 <script>
   import { Form } from '@/lib/base'
-  import Input from '@/components/InputExample.vue'
+  import { Field } from '@/lib/base'
+  import Input from '@/components/samples/Input.vue'
 
-  // Create fields manually;
+  // Add fields manually;
   const loginForm = new Form('Login Form')
   loginForm.textField = 'username'
   loginForm.passwordField = 'password'
 
-  // Create fields (text fields) automatically;
-  const registerForm = new Form('Register Form', ['username', 'firstName', 'lastName', 'address'])
+  // Add fields (text fields) automatically;
+  const registerForm = new Form('Register Form', ['username', 'firstName', 'lastName'])
+
+  // Add instantiated field objects;
+  let field = new Field('address', {initial: 'test'})
+  field.required = false
+
+  registerForm.field = field
 
   export default {
-    name: 'SimpleFormExample',
+    name: 'FormExample',
     components: {
       'v-input': Input
     },
@@ -87,6 +94,7 @@
         registerForm: registerForm.reset()
       }
     },
+
     methods: {
       submitLogin() {
         this.loginForm.resetErrors()
@@ -99,6 +107,17 @@
           }
         }
         this.loginForm.setErrors(exampleResponse)
+      },
+      submitRegister() {
+        let form = this.registerForm
+        let formData = this.registerForm.data
+        let formSelectedData = this.registerForm.getData(
+          ['firstName', 'lastName']
+        )
+
+        console.log('form', form)
+        console.log('form.data', formData)
+        console.log('form.getData', formSelectedData)
       }
     }
   }
@@ -123,7 +142,9 @@
   }
 
   table.data-table td {
-    border: 1px solid gray;
+    border-bottom: 1px solid whitesmoke;
+    border-top: 1px solid whitesmoke;
+    padding: 5px;
   }
 
   .form-error {

@@ -7,12 +7,12 @@
 </template>
 
 <script>
-import FormExample from './components/FormExample.vue'
+import Form from './components/samples/Form.vue'
 
 export default {
   name: 'app',
   components: {
-    'v-form': FormExample
+    'v-form': Form
   }
 }
 </script>

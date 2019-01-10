@@ -19,9 +19,12 @@
 
 <script>
   export default {
-    name: 'InputExample',
+    name: 'Input',
     props: {
       field: Object
+    },
+    created () {
+      this.field.init()
     },
     data () {
       return {
@@ -35,8 +38,15 @@
   div.input {
     margin: 0;
   }
+  input {
+    padding: 5px;
+    margin-bottom: 5px;
+  }
   .error {
-    font-size: 10px;
-    color: red;
+    font-size: 12px;
+    color: rgb(255, 81, 76);
+  }
+  label span {
+    color: green;
   }
 </style>
