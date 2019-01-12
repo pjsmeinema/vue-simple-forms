@@ -1,27 +1,25 @@
 export class Field {
-  constructor (name, props = {}) {
+  constructor (name, { type = 'text', required = true, initial = '', props = {}} = {}) {
     this.name = name
     this.id = `id_${name}`
     this.value = ''
-
-    this.placeholder = props.placeholder || ''
-    this.type = props.type || 'text'
-    this.errors = props.errors || []
-    this._initial = props.initial || null
-    this.required = true
-    if (props.required !== undefined)
-      this.required = props.required
+    this.type = type
+    this.required = required
+    this.errors = []
+    this.initial = initial
+    this.props = props
   }
 
   set error (error) {
     this.errors.push(error)
   }
 
-  set initial (value) {
-    this._initial = value
+  reset () {
+    this.value = ''
+    this.error = []
   }
 
   init () {
-    this.value = this._initial || this.value
+    this.value = this.initial || this.value
   }
 }

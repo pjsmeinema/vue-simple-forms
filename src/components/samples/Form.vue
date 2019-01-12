@@ -78,10 +78,7 @@ loginForm.passwordField = 'password'
 const registerForm = new Form('Register Form', ['username', 'firstName', 'lastName'])
 
 // Add instantiated field objects;
-const field = new Field('address', { initial: 'test' })
-field.required = false
-
-registerForm.field = field
+registerForm.field = new Field('address', { required: false, initial: 'Adres 1' })
 
 export default {
   name: 'FormExample',

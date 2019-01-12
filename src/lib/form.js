@@ -1,7 +1,6 @@
-/** Class to create a form instance. */
-
 import { Field } from './field'
 
+/** Class to create a form instance. */
 export class Form {
   constructor (name, fields = []) {
     this.name = name
@@ -12,8 +11,8 @@ export class Form {
   }
 
   get data () {
-    let data = {}
-    for (let key in this.fields) {
+    const data = {}
+    for (const key in this.fields) {
       data[key] = this.fields[key].value
     }
     return data
@@ -31,13 +30,13 @@ export class Form {
     this.fields[name] = new Field(name)
   }
 
-  set passwordField(name) {
-    this.fields[name] = new Field(name, {type: 'password'})
+  set passwordField (name) {
+    this.fields[name] = new Field(name, 'password')
   }
 
   reset () {
     this._errors = []
-    for (let key in this.fields) {
+    for (const key in this.fields) {
       this.fields[key].value = ''
       this.fields[key].errors = []
     }
@@ -46,7 +45,7 @@ export class Form {
 
   resetErrors () {
     this._errors = []
-    for (let key in this.fields) {
+    for (const key in this.fields) {
       this.fields[key].errors = []
     }
   }
@@ -60,7 +59,7 @@ export class Form {
 
   setErrors (response) {
     if (response.status === 400) {
-      for (let key in this.fields) {
+      for (const key in this.fields) {
         this.fields[key].errors = (key in response.data) ? response.data[key] : []
       }
     } else {
