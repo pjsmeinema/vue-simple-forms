@@ -72,6 +72,7 @@ import Input from '@/components/samples/Input.vue'
 // Add fields manually;
 const loginForm = new Form('Login Form')
 loginForm.textField = 'username'
+loginForm.emailField = 'email'
 loginForm.passwordField = 'password'
 
 // Add fields (text fields) automatically;

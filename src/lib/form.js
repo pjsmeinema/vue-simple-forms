@@ -22,6 +22,10 @@ export class Form {
     this.errors.push(error)
   }
 
+  set emailField (name) {
+    this.fields[name] = new Field(name, { type: 'email' })
+  }
+
   set field (field) {
     this.fields[field.name] = field
   }
