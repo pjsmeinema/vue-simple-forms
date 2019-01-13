@@ -1,13 +1,15 @@
 export class Field {
-  constructor (name, { type = 'text', required = true, initial = '', props = {}} = {}) {
+  constructor (name, { type = 'text', required = true, initial = ''} = {}) {
     this.name = name
     this.id = `id_${name}`
-    this.value = ''
+    this.errors = []
     this.type = type
     this.required = required
-    this.errors = []
     this.initial = initial
-    this.props = props
+
+    for (const key in arguments[1]) {
+      if (arguments[1].hasOwnProperty(key)) this[key] = arguments[1][key]
+    }
   }
 
   set error (error) {
