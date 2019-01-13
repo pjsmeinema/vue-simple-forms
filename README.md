@@ -109,4 +109,4 @@ export default {
 </script>
 ```
 
-If you have questions, suggestions or want to be a collaborator, please at `pjsmeinema [at] gmail [dot] com`.
+If you have questions, suggestions or want to be a collaborator, please contact me at `pjsmeinema [at] gmail [dot] com`.
