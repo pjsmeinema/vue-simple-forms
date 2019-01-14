@@ -12,13 +12,14 @@
   "main": "src/lib/base.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pjsmeinema/vue-forms.git"
+    "url": "git+https://github.com/pjsmeinema/vue-simple-forms.git"
   },
   "bugs": {
-    "url": "https://github.com/pjsmeinema/vue-forms/issues"
+    "url": "https://github.com/pjsmeinema/vue-simple-forms/issues"
   },
-  "homepage": "https://github.com/pjsmeinema/vue-forms#readme",
+  "homepage": "https://github.com/pjsmeinema/vue-simple-forms#readme",
   "dependencies": {
+    "npm": "^6.5.0",
     "vue": "^2.5.21"
   },
   "devDependencies": {
