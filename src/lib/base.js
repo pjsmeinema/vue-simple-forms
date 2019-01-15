@@ -1,3 +1,3 @@
 export { Form } from './form'
-export { Field, TextField } from './fields'
+export { Field, TextField, NumberField, EmailField, PasswordField } from './fields'
 
