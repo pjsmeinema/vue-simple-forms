@@ -1,12 +1,11 @@
 <template>
   <div>
     <div class="form">
+      <!--FORM 1-->
       <div class="form--inner">
         <h2>{{ loginForm.name }}</h2>
         <form method="post" @submit.prevent="submitLogin">
-
-          <v-input :field="loginForm.fields.username"/>
-          <v-input :field="loginForm.fields.password"/>
+          <v-input v-for="field in loginForm.fields" :key="field.name" :field="field" />
 
           <button type="submit">Submit</button>
 
@@ -16,75 +15,51 @@
         </form>
       </div>
       <div class="form--inner">
-        <h3>Data</h3>
-        <table class="data-table">
-          <tr>
-            <td><strong>Name</strong></td>
-            <td><strong>Value</strong></td>
-            <td><strong>Errors</strong></td>
-          </tr>
-          <tr v-for="field in loginForm.fields" :key="field.name">
-            <td>{{ field.name }}</td>
-            <td>{{ field.value }}</td>
-            <td>{{ field.errors }}</td>
-          </tr>
-        </table>
+        <v-form-data :form="loginForm" />
       </div>
     </div>
 
+    <!--FORM 2-->
     <div class="form">
       <div class="form--inner">
         <h2>{{ registerForm.name }}</h2>
         <form method="post" @submit.prevent="submitRegister">
-          <v-input :field="registerForm.fields.username"/>
-          <v-input :field="registerForm.fields.firstName"/>
-          <v-input :field="registerForm.fields.lastName"/>
-          <v-input :field="registerForm.fields.address"/>
+          <v-input v-for="field in registerForm.fields" :key="field.name" :field="field" />
 
           <button type="submit">Submit</button>
         </form>
       </div>
       <div class="form--inner">
-        <h3>Data</h3>
-        <table class="data-table">
-          <tr>
-            <td><strong>Name</strong></td>
-            <td><strong>Value</strong></td>
-            <td><strong>Errors</strong></td>
-          </tr>
-          <tr v-for="field in registerForm.fields" :key="field.name">
-            <td>{{ field.name }}</td>
-            <td>{{ field.value }}</td>
-            <td>{{ field.errors }}</td>
-          </tr>
-        </table>
+        <v-form-data :form="registerForm" />
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
 import { Form } from '@/lib/base'
-import { Field } from '@/lib/base'
+import { TextField } from '@/lib/base'
 import Input from '@/components/samples/Input.vue'
+import FormData from '@/components/samples/FormData.vue'
 
 // Add fields manually;
 const loginForm = new Form('Login Form')
 loginForm.textField = 'username'
 loginForm.emailField = 'email'
 loginForm.passwordField = 'password'
+loginForm.numberField = 'justanumber'
 
 // Add fields (text fields) automatically;
 const registerForm = new Form('Register Form', ['username', 'firstName', 'lastName'])
 
 // Add instantiated field objects;
-registerForm.field = new Field('address', { required: false, initial: 'Adres 1', yourPreferred: 'argument' })
+registerForm.field = new TextField('address', { required: false, initial: 'Adres 1', yourPreferred: 'argument' })
 
 export default {
   name: 'FormExample',
   components: {
-    'v-input': Input
+    'v-input': Input,
+    'v-form-data': FormData
   },
   data () {
     return {
@@ -133,16 +108,6 @@ export default {
 
   .form div.form--inner {
     width: 50%;
-  }
-
-  table.data-table {
-    width: 100%;
-  }
-
-  table.data-table td {
-    border-bottom: 1px solid whitesmoke;
-    border-top: 1px solid whitesmoke;
-    padding: 5px;
   }
 
   .form-error {

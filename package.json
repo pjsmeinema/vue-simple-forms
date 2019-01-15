@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/pjsmeinema/vue-simple-forms#readme",
   "dependencies": {
-    "npm": "^6.5.0",
     "vue": "^2.5.21"
   },
   "devDependencies": {

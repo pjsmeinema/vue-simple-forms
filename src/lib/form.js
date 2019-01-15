@@ -1,4 +1,4 @@
-import { Field } from './field'
+import { TextField, NumberField, PasswordField, EmailField } from './fields'
 
 /** Class to create a form instance. */
 export class Form {
@@ -23,19 +23,23 @@ export class Form {
   }
 
   set emailField (name) {
-    this.fields[name] = new Field(name, { type: 'email' })
+    this.fields[name] = new EmailField(name)
   }
 
   set field (field) {
     this.fields[field.name] = field
   }
 
+  set numberField (name) {
+    this.fields[name] = new NumberField(name)
+  }
+
   set passwordField (name) {
-    this.fields[name] = new Field(name, { type: 'password' })
+    this.fields[name] = new PasswordField(name)
   }
 
   set textField (name) {
-    this.fields[name] = new Field(name)
+    this.fields[name] = new TextField(name)
   }
 
   reset () {
