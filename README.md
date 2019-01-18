@@ -11,7 +11,7 @@
 $ npm install vue-simple-forms
 ```
 
-#### GitHub (setup Vue.js environment with examples)
+#### GitHub (setup a simple Vue.js environment with examples)
 
 ```bash
 $ git clone https://github.com/pjsmeinema/vue-simple-forms
@@ -34,19 +34,26 @@ form.passwordField = 'password1'
 form.passwordField = 'password2'
 ```
 
+Or add an array of (text)field names:
+```javascript
+import { Form, TextField, EmailField } from 'vue-simple-forms'
+
+const form = new Form('Contact Form', [
+  new TextField('first_name', { maxlength: 100 }),
+  new TextField('last_name', { maxlength: 100 }),
+  new EmailField('first_name'),
+  new TextField('message', { maxlength: 1000 }),
+])
+```
+
+
 Or add Field objects manually to the Form:
 ```javascript
-import { Field } from 'vue-simple-forms'
+import { TextField } from 'vue-simple-forms'
 
-form.field = new Field('address', { required: false, initial: 'Adres 1' })
+form.field = new TextField('address', { required: false, initial: 'Adres 1' })
 ```
 
-Or add an array of field names:
-```javascript
-import { Form } from 'vue-simple-forms'
-
-const form = new Form('Contact Form', ['firstName', 'lastName', 'email'])
-```
 
 ## Integration with Vue.js
 Below you see an example of how you can use `vue-simple-forms` in your Vue.js project:
@@ -67,7 +74,7 @@ Below you see an example of how you can use `vue-simple-forms` in your Vue.js pr
       <button type="submit">Submit</button>
 
       <!--Iterate over the form errors-->
-      <div v-for="error in form.errors" :key="error">
+      <div class="form-error" v-for="error in form.errors" :key="error">
         {{ error }}
       </div>
     </form>
@@ -75,17 +82,16 @@ Below you see an example of how you can use `vue-simple-forms` in your Vue.js pr
 </template>
 
 <script>
-import { Form, Field } from 'vue-simple-forms'
+import { Form, TextField, EmailField, PasswordField } from 'vue-simple-forms'
 
-// Instantiate your form (recommended to store this into a separated js file);
-const form = new Form('Register Form')
+const form = new Form('Register Form', [
+  new TextField('username', { placeholder: 'Username' }),
+  new EmailField('email', { placeholder: 'Your email' }),
+  new PasswordField('password1', { placeholder: 'Choose your password' }),
+  new PasswordField('password2', { placeholder: 'Repeat your password' })
+])
 
 // Add different fields;
-form.field = new Field('username', { placeholder: 'Choose a nickname' })
-form.field = new Field('email', { type: 'email', placeholder: 'Enter your email' })
-form.field = new Field('password1', { type: 'password', placeholder: 'Enter a password' })
-form.field = new Field('password2', { type: 'password', placeholder: 'Repeat the password' })
-
 export default {
   name: 'FormExample',
   data () {
@@ -95,14 +101,10 @@ export default {
   },
   methods: {
     submit () {
-      // Get data and do whatever you want...
+      this.loginForm.resetErrors()
+
+      // Get data and do whatever you want.
       console.log(this.form.data)
-      
-      // Or set an error if necessary...
-      this.form.fields.email.error = 'Invalid email address'
-      
-      // Or let vue-simple-forms help you setting your errors, based on an Ajax/Axios call...
-      this.form.setErrors(response)
     }
   }
 }

@@ -7,7 +7,7 @@ export class Form {
     this.errors = []
     this.fields = {}
 
-    this.setTextFields(fields)
+    this.setFields(fields)
   }
 
   get data () {
@@ -60,11 +60,8 @@ export class Form {
     }
   }
 
-  setTextFields (fields) {
-    // Creates text fields based an array of names;
-    fields.forEach(field => {
-      this.textField = field
-    })
+  setFields (fields) {
+    fields.forEach(field => { this.field = field })
   }
 
   setErrors (response) {

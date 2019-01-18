@@ -21,16 +21,16 @@
 </template>
 
 <script>
-import { Form } from 'vue-simple-forms'
+import { Form, TextField, EmailField, PasswordField } from 'vue-simple-forms'
 
-const form = new Form('Register Form')
+const form = new Form('Register Form', [
+  new TextField('username', { placeholder: 'Username' }),
+  new EmailField('email', { placeholder: 'Your email' }),
+  new PasswordField('password1', { placeholder: 'Choose your password' }),
+  new PasswordField('password2', { placeholder: 'Repeat your password' })
+])
 
 // Add different fields;
-form.textField = 'username'
-form.emailField = 'email'
-form.passwordField = 'password1'
-form.passwordField = 'password2'
-
 export default {
   name: 'FormExample',
   data () {

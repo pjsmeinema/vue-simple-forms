@@ -49,8 +49,12 @@ loginForm.emailField = 'email'
 loginForm.passwordField = 'password'
 loginForm.numberField = 'justanumber'
 
-// Add fields (text fields) automatically;
-const registerForm = new Form('Register Form', ['username', 'firstName', 'lastName'])
+// Add fields while instantiating the form;
+const registerForm = new Form('Register Form', [
+  new TextField('username'),
+  new TextField('firstName', { required: false }),
+  new TextField('lastName', { required: false })
+])
 
 // Add instantiated field objects;
 registerForm.field = new TextField('address', { required: false, initial: 'Adres 1', yourPreferred: 'argument' })
