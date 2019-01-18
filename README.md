@@ -34,7 +34,7 @@ form.passwordField = 'password1'
 form.passwordField = 'password2'
 ```
 
-Or add an array of (text)field names:
+Or add an array of Fields objects:
 ```javascript
 import { Form, TextField, EmailField } from 'vue-simple-forms'
 
@@ -42,7 +42,7 @@ const form = new Form('Contact Form', [
   new TextField('first_name', { maxlength: 100 }),
   new TextField('last_name', { maxlength: 100 }),
   new EmailField('first_name'),
-  new TextField('message', { maxlength: 1000 }),
+  new TextField('message', { maxlength: 1000 })
 ])
 ```
 
