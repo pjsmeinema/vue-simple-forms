@@ -80,10 +80,11 @@ export default {
         status: 400,
         data: {
           username: ['Username already exists'],
-          password: ['Password is a bad choice']
+          password: ['Password is a bad choice'],
+          non_field_errors: ['Unable to log in with provided credentials.']
         }
       }
-      this.loginForm.setErrors(exampleResponse)
+      this.loginForm.setErrorsByResponse(exampleResponse)
     },
     submitRegister () {
       const form = this.registerForm

@@ -1,11 +1,19 @@
-import { TextField, NumberField, PasswordField, EmailField } from './fields'
+import {
+  TextField,
+  NumberField,
+  PasswordField,
+  EmailField
+} from './fields'
 
 /** Class to create a form instance. */
 export class Form {
-  constructor (name, fields = []) {
+  constructor (name, fields = [], config) {
     this.name = name
     this.errors = []
     this.fields = {}
+    this.config = config !== undefined ? config : {
+      formErrorsKey: 'form_errors' // key of the form errors in the response (e.g. an axios call to an api;)
+    }
 
     this.setFields(fields)
   }
@@ -43,7 +51,7 @@ export class Form {
   }
 
   reset () {
-    this._errors = []
+    this.errors = []
     for (const key in this.fields) {
       if (this.fields.hasOwnProperty(key)) {
         this.fields[key].value = ''
@@ -54,7 +62,7 @@ export class Form {
   }
 
   resetErrors () {
-    this._errors = []
+    this.errors = []
     for (const key in this.fields) {
       if (this.fields.hasOwnProperty(key)) this.fields[key].errors = []
     }
@@ -64,13 +72,25 @@ export class Form {
     fields.forEach(field => { this.field = field })
   }
 
-  setErrors (response) {
-    if (response.status === 400) {
-      for (const key in this.fields) {
-        if (this.fields.hasOwnProperty(key)) {
-          this.fields[key].errors = (key in response.data) ? response.data[key] : []
-        }
+  setErrors (fieldErrors, formErrors) {
+    // Sets field and/or non-field errors;
+    this.errors = formErrors !== undefined ? formErrors : []
+
+    for (const key in this.fields) {
+      if (this.fields.hasOwnProperty(key)) {
+        this.fields[key].errors = (key in fieldErrors) ? fieldErrors[key] : []
       }
+    }
+  }
+
+  setErrorsByResponse (response) {
+    // Sets field and/or non-field errors by response.
+    // The non-field errors (default key=non_field_errors) should are set on the form;
+    if (response.status === 400) {
+      this.setErrors(
+        response.data,
+        response.data[this.config.formErrorsKey]
+      )
     } else {
       this.error = `${response.status}_error`
     }
