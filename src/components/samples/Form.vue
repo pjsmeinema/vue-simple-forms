@@ -43,21 +43,20 @@ import Input from '@/components/samples/Input.vue'
 import FormData from '@/components/samples/FormData.vue'
 
 // Add fields manually;
-const loginForm = new Form('Login Form')
+const loginForm = new Form()
 loginForm.textField = 'username'
 loginForm.emailField = 'email'
 loginForm.passwordField = 'password'
 loginForm.numberField = 'justanumber'
 
 // Add fields while instantiating the form;
-const registerForm = new Form('Register Form', [
-  new TextField('username'),
-  new TextField('firstName', { required: false }),
-  new TextField('lastName', { required: false })
-])
-
-// Add instantiated field objects;
-registerForm.field = new TextField('address', { required: false, initial: 'Adres 1', yourPreferred: 'argument' })
+class RegisterForm extends Form {
+  fields = {
+    'username': new TextField('username'),
+    'firstName': new TextField('firstName', { required: false }),
+    'lastName': new TextField('lastName', { required: false })
+  }
+}
 
 export default {
   name: 'FormExample',
@@ -66,9 +65,17 @@ export default {
     'v-form-data': FormData
   },
   data () {
+    const regForm = new RegisterForm()
+    // Add instantiated field objects;
+    regForm.field = new TextField('address', {
+      required: false,
+      initial: 'Adres 1',
+      anyArgument: 'youLike' // Your own arguments are stored on the field: field.anyArgument;
+    })
+
     return {
       loginForm: loginForm,
-      registerForm: registerForm.reset()
+      registerForm: regForm
     }
   },
 
@@ -88,10 +95,14 @@ export default {
     },
     submitRegister () {
       const form = this.registerForm
-      const formData = this.registerForm.data
-      const formSelectedData = this.registerForm.getData(
+      const formData = form.data
+      const formSelectedData = form.getData(
         ['firstName', 'lastName']
       )
+
+      // Example of manually setting field errors;
+      form.resetErrors()
+      form.fields.address.error = 'Wrong address!'
 
       console.log('form', form)
       console.log('form.data', formData)

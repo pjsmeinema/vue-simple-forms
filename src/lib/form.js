@@ -7,13 +7,19 @@ import {
 
 /** Class to create a form instance. */
 export class Form {
-  constructor (name, fields = [], config) {
-    this.name = name
-    this.errors = []
-    this.fields = {}
-    this.config = config !== undefined ? config : {
-      formErrorsKey: 'form_errors' // key of the form errors in the response (e.g. an axios call to an api;)
-    }
+  // Form configuration;
+  config = {
+    formErrorsKey: 'form_errors' // key of the form errors in the response (e.g. an axios call to an api;)
+  }
+
+  // Form errors;
+  errors = []
+
+  // Object of Field objects;
+  fields = {}
+
+  constructor (fields = [], config) {
+    this.config = config !== undefined ? config : this.config
 
     this.setFields(fields)
   }
@@ -92,7 +98,7 @@ export class Form {
         response.data[this.config.formErrorsKey]
       )
     } else {
-      this.error = `${response.status}_error`
+      this.error = `status_${response.status}`
     }
   }
 
